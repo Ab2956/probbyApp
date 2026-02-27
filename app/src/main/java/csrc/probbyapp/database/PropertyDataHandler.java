@@ -1,7 +1,11 @@
 package csrc.probbyapp.database;
 
+import csrc.probbyapp.models.PropertyModel;
 
-public class propertyDataHandler {
+
+public class PropertyDataHandler {
+
+  public void addProperty(PropertyModel property) {}
 
   public void getProperties() {}
   public void getRent(){}

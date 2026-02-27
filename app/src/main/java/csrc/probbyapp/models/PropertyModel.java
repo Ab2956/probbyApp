@@ -2,7 +2,7 @@ package csrc.probbyapp.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class propertyModel {
+public class PropertyModel {
 
     @SerializedName("_id")
     private String id;
