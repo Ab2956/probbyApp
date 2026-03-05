@@ -12,10 +12,17 @@ public class PropertyDataHandler {
   public void getRooms(){}
   public void getMortgage(){}
   public void getPropertyType(){}
-  public void getAddress(){}
-  public void getCity(){}
-  public void getPostcode(){}
+  public String getAddress(String propertyId){
+    return null;
+  }
+  public String getCity(String propertyId){
+    return null;
+  }
+  public String getPostcode(String propertyId){
+    return null;
+  }
   public void getStatus(){}
+  public void getPropertyId(){}
 
 
 }
