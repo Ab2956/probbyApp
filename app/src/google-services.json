@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842519694900",
+    "project_id": "probby-54897",
+    "storage_bucket": "probby-54897.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842519694900:android:b016e6f94f213cf3b18461",
+        "android_client_info": {
+          "package_name": "csrc.probbyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDQXwbmguSQoerXYTvMdRAanUjQV3DOWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
