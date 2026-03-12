@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -32,7 +33,7 @@ public class LoginPageActivity extends AppCompatActivity implements AuthView {
         loginBtn.setOnClickListener(v ->  {
             String email = emailInput.getText().toString();
             String pass = passInput.getText().toString();
-            loginController.signInUser(email, pass);
+            loginController.signInUser(email, pass, v);
 
         });
     }
@@ -40,6 +41,10 @@ public class LoginPageActivity extends AppCompatActivity implements AuthView {
     public void navigateTo(){
         startActivity(new Intent(this, HomePageActivity.class));
         finish();
+    }
+    @Override
+    public void showMessage(String message, View view){
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
     }
 
 }
