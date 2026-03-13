@@ -5,30 +5,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 import csrc.probbyapp.controllers.LoginController;
 import csrc.probbyapp.R;
 
 public class LoginPageActivity extends AppCompatActivity implements AuthView {
     private boolean isLoggedIn = false;
-    private LoginController loginController;
+    private final LoginController loginController = new LoginController(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page);
 
-        loginController = new LoginController(this);
         Button loginBtn = findViewById(R.id.btnLogin);
         EditText emailInput = findViewById(R.id.etEmail);
         EditText passInput = findViewById(R.id.etPassword);
+
+        TextView createAccBtn = findViewById(R.id.tvRegister);
 
         loginBtn.setOnClickListener(v ->  {
             String email = emailInput.getText().toString();
@@ -36,6 +41,11 @@ public class LoginPageActivity extends AppCompatActivity implements AuthView {
             loginController.signInUser(email, pass, v);
 
         });
+        createAccBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CreateAccountActivity.class);
+            startActivity(intent);
+        });
+
     }
     @Override
     public void navigateTo(){

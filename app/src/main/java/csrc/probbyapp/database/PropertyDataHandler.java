@@ -1,9 +1,13 @@
 package csrc.probbyapp.database;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import csrc.probbyapp.models.PropertyModel;
 
 
 public class PropertyDataHandler {
+
+  FirebaseFirestore db = FirebaseFirestore.getInstance();
 
   public void addProperty(PropertyModel property) {}
 
