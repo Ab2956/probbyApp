@@ -29,6 +29,12 @@ public class CreateAccountActivity extends AppCompatActivity implements AuthView
         EditText passInput = findViewById(R.id.etPassword);
         EditText nameInput = findViewById(R.id.etName);
         EditText confirmPassInput = findViewById(R.id.etConfirmPassword);
+        Button backBtn = findViewById(R.id.btnBack);
+
+        backBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginPageActivity.class));
+            finish();
+        });
 
         loginController = new LoginController((this));
 
