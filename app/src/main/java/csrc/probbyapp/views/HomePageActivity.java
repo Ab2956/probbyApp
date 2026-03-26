@@ -1,5 +1,6 @@
 package csrc.probbyapp.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import csrc.probbyapp.R;
+import csrc.probbyapp.controllers.LoginController;
+import csrc.probbyapp.controllers.UserController;
 
 public class HomePageActivity extends AppCompatActivity {
+
+
+    UserController userController = new UserController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +53,10 @@ public class HomePageActivity extends AppCompatActivity {
 
         Button logoutBtn = findViewById(R.id.btnLogout);
         logoutBtn.setOnClickListener(v -> {
-            // TODO implement logout
+
+            userController.signOutUser();
+            startActivity(new Intent(this, LoginPageActivity.class));
+            finish();
         });
 
     }
