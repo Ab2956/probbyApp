@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.LoginController;
@@ -55,6 +57,7 @@ public class HomePageActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(v -> {
 
             userController.signOutUser();
+           // Snackbar.make( HomePageActivity,"Successfully logged out", Snackbar.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginPageActivity.class));
             finish();
         });

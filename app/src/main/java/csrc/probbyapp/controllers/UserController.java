@@ -1,7 +1,5 @@
 package csrc.probbyapp.controllers;
 
-import android.view.View;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserController {
