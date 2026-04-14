@@ -1,22 +1,16 @@
 package csrc.probbyapp.views;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import csrc.probbyapp.R;
-import csrc.probbyapp.controllers.UserController;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private UserController userController = new UserController();
-    private Fragment homeF, mapF, propertiesF, settingsF;
+    private Fragment homeF, mapF, propertiesF, settingsF, profileF;
     private Fragment activeFragment;
 
     @Override
@@ -33,6 +27,7 @@ public class HomePageActivity extends AppCompatActivity {
             mapF = new MapFragment();
             propertiesF = new PropertiesFragment();
             settingsF = new SettingsFragment();
+            profileF = new ProfileFragment();
 
             activeFragment = homeF;
 
@@ -40,12 +35,15 @@ public class HomePageActivity extends AppCompatActivity {
                     .add(R.id.fragmentContainer, propertiesF, "properties").hide(propertiesF)
                     .add(R.id.fragmentContainer, mapF, "map").hide(mapF)
                     .add(R.id.fragmentContainer, settingsF, "settings").hide(settingsF)
+                    .add(R.id.fragmentContainer, profileF, "profile").hide(profileF)
                     .add(R.id.fragmentContainer, homeF, "home")
                     .commit();
         }
 
+        bottomNav.setSelectedItemId(R.id.menu_home);
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+
             if (itemId == R.id.menu_home) {
                 loadFragment(homeF);
                 return true;
@@ -59,17 +57,12 @@ public class HomePageActivity extends AppCompatActivity {
                 loadFragment(settingsF);
                 return true;
             }
+            else if(itemId == R.id.menu_profile){
+                loadFragment(profileF);
+                return true;
+            }
             return false;
         });
-
-        // logout button implementing userController
-        Button btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(v -> {
-            userController.signOutUser();
-            startActivity(new Intent(this, LoginPageActivity.class));
-            finish();
-        });
-
     }
 
     private void loadFragment(Fragment nextFragment) {

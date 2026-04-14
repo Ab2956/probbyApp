@@ -1,5 +1,5 @@
 package csrc.probbyapp.database;
-import android.util.Log;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;

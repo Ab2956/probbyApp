@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
 
 
@@ -20,7 +18,6 @@ import csrc.probbyapp.R;
 public class LoginPageActivity extends AppCompatActivity implements AuthView {
     private boolean isLoggedIn = false;
     private final LoginController loginController = new LoginController(this);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

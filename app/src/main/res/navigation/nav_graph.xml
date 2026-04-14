@@ -3,4 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/propertiesFragment"
+        android:name="csrc.probbyapp.views.PropertiesFragment"
+        tools:layout="layout/fragment_properties" />
+    <action
+        android:id="@+id/action_propertiesFragment_to_addPropertyFragment"
+        app:destination="@id/addPropertyFragment" />
+
+    <fragment
+        android:id="@+id/addPropertyFragment"
+        android:name="csrc.probbyapp.views.AddPropertiesFragment"
+        tools:layout="@layout/fragment_add_properties" />
 </navigation>

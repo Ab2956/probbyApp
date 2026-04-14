@@ -10,8 +10,8 @@ public class PropertyServices {
         this.dataHandler = dataHandler;
     }
 
-    public void addProperty(PropertyModel property) {
-        dataHandler.addProperty(property);
+    public void addProperty(PropertyModel property, String userId) {
+        dataHandler.addProperty(property, userId);
     }
 
 

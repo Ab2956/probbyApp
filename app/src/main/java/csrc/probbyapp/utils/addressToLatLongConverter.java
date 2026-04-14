@@ -1,4 +1,4 @@
-package utils;
+package csrc.probbyapp.utils;
 
 import android.content.Context;
 import android.location.Address;
@@ -16,14 +16,14 @@ public class addressToLatLongConverter {
         this.dataHandler = dataHandler;
     }
 
-    public LatLng convertAddressToLatLong(Context context, String propertyId) {
+    public LatLng convertAddressToLatLong(Context context,String userId, String propertyId) {
         Geocoder geocoder = new Geocoder(context);
         LatLng latLng = null;
 
         try {
-            String fullAddress = dataHandler.getAddress(propertyId) +
-                                 dataHandler.getCity(propertyId) +
-                                 dataHandler.getPostcode(propertyId);
+            String fullAddress = dataHandler.getAddress(userId,propertyId) +
+                                 dataHandler.getCity(userId,propertyId) +
+                                 dataHandler.getPostcode(userId, propertyId);
             List<Address> addressList = geocoder.getFromLocationName(fullAddress, 1);
             Address location = addressList.get(0);
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
