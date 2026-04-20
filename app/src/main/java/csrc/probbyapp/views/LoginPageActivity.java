@@ -2,6 +2,7 @@ package csrc.probbyapp.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +15,12 @@ import com.google.firebase.FirebaseApp;
 
 import csrc.probbyapp.controllers.LoginController;
 import csrc.probbyapp.R;
+import csrc.probbyapp.utils.UiHelper;
 
 public class LoginPageActivity extends AppCompatActivity implements AuthView {
     private boolean isLoggedIn = false;
     private final LoginController loginController = new LoginController(this);
+    UiHelper uiHelper = new UiHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,14 @@ public class LoginPageActivity extends AppCompatActivity implements AuthView {
             loginController.signInUser(email, pass, v);
 
         });
+
         createAccBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, CreateAccountActivity.class);
             startActivity(intent);
         });
+
+        uiHelper.applyTouchEffect(loginBtn);
+        uiHelper.applyTouchEffect(createAccBtn);
 
     }
     @Override

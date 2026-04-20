@@ -10,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.LoginController;
+import csrc.probbyapp.utils.UiHelper;
 
 public class CreateAccountActivity extends AppCompatActivity implements AuthView {
 
     private LoginController loginController;
+    UiHelper uiHelper = new UiHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AuthView
             String name = nameInput.getText().toString();
             loginController.createAccount(name, email, pass, v);
         });
+        uiHelper.applyTouchEffect(createAccBtn);
     }
 
     @Override

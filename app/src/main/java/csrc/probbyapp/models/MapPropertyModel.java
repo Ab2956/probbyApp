@@ -6,10 +6,13 @@ public class MapPropertyModel {
 
     private String propertyId;
     private LatLng latLng;
+    private String address;
 
-    public MapPropertyModel(String address, LatLng latLng) {
+
+    public MapPropertyModel(String propertyId, LatLng latLng, String address) {
         this.propertyId = propertyId;
         this.latLng = latLng;
+        this.address = address;
     }
 
     public String getPropertyId() {
@@ -18,5 +21,8 @@ public class MapPropertyModel {
 
     public LatLng getLatLng(){
         return latLng;
+    }
+    public String getAddress(){
+        return address;
     }
 }

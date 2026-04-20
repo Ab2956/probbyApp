@@ -38,6 +38,21 @@ public class HomePageActivity extends AppCompatActivity {
                     .add(R.id.fragmentContainer, profileF, "profile").hide(profileF)
                     .add(R.id.fragmentContainer, homeF, "home")
                     .commit();
+        } else {
+            // RESTORE fragments from FragmentManager to prevent "Ghosts"
+            homeF = fm.findFragmentByTag("home");
+            mapF = fm.findFragmentByTag("map");
+            propertiesF = fm.findFragmentByTag("properties");
+            settingsF = fm.findFragmentByTag("settings");
+            profileF = fm.findFragmentByTag("profile");
+
+            // Find which one was active before the restart
+            activeFragment = homeF; // Default fallback
+            if (homeF != null && !homeF.isHidden()) activeFragment = homeF;
+            else if (mapF != null && !mapF.isHidden()) activeFragment = mapF;
+            else if (propertiesF != null && !propertiesF.isHidden()) activeFragment = propertiesF;
+            else if (settingsF != null && !settingsF.isHidden()) activeFragment = settingsF;
+            else if (profileF != null && !profileF.isHidden()) activeFragment = profileF;
         }
 
         bottomNav.setSelectedItemId(R.id.menu_home);
@@ -67,11 +82,16 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment nextFragment) {
         if (nextFragment == null || nextFragment == activeFragment) return;
-        
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (activeFragment != null) {
-            transaction.hide(activeFragment);
-        }
+
+        if (homeF != null) transaction.hide(homeF);
+        if (mapF != null) transaction.hide(mapF);
+        if (propertiesF != null) transaction.hide(propertiesF);
+        if (settingsF != null) transaction.hide(settingsF);
+        if (profileF != null) transaction.hide(profileF);
+
+        // Show only the selected one
         transaction.show(nextFragment).commit();
         activeFragment = nextFragment;
     }

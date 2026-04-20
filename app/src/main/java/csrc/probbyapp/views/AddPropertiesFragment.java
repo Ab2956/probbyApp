@@ -13,6 +13,7 @@ import java.util.UUID;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.PropertyController;
 import csrc.probbyapp.models.PropertyModel;
+import csrc.probbyapp.utils.UiHelper;
 
 public class AddPropertiesFragment extends DialogFragment {
 
@@ -20,6 +21,7 @@ public class AddPropertiesFragment extends DialogFragment {
     FirebaseAuth fA = FirebaseAuth.getInstance();
     PropertyController propertyController = new PropertyController();
     EditText pType, address, city, postcode, rooms, rent, mortgage, status;
+    UiHelper uiHelper = new UiHelper();
 
     public void addPropertiesFragment () {}
 
@@ -69,6 +71,7 @@ public class AddPropertiesFragment extends DialogFragment {
 
             dismiss();
         });
+        uiHelper.applyTouchEffect(subBtn);
 
         return view;
     }

@@ -1,6 +1,7 @@
 package csrc.probbyapp.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,28 +14,31 @@ import java.util.ArrayList;
 import java.util.List;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.PropertyController;
-import csrc.probbyapp.database.OnGetPropertiesListener;
+import csrc.probbyapp.utils.OnGetPropertiesListener;
 import csrc.probbyapp.models.PropertyModel;
 import csrc.probbyapp.utils.PropertyAdapter;
+import csrc.probbyapp.utils.UiHelper;
 
 public class PropertiesFragment extends Fragment {
     List<PropertyModel> propertyList = new ArrayList<>();
 
-    PropertyController propertyController = new PropertyController();
     FirebaseAuth fA = FirebaseAuth.getInstance();
     String userId = fA.getCurrentUser().getUid();
     PropertyAdapter propertyAdapter;
+    UiHelper uiHelper = new UiHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_properties, container, false);
+        PropertyController propertyController = new PropertyController();
 
         Button btnAddProperty = view.findViewById(R.id.btnAddProperty);
         btnAddProperty.setOnClickListener(v -> {
            AddPropertiesFragment addPropertiesFragment = new AddPropertiesFragment();
            addPropertiesFragment.show(getParentFragmentManager(), "addPropertiesFragment");
         });
+        uiHelper.applyTouchEffect(btnAddProperty);
 
         RecyclerView rv = view.findViewById(R.id.rvProperties);
         rv.setLayoutManager(new LinearLayoutManager(getContext())); // Check if this exists!
@@ -47,17 +51,21 @@ public class PropertiesFragment extends Fragment {
             propertyDetailsFragment.setArguments(args);
 
             propertyDetailsFragment.show(getParentFragmentManager(), "propertyDetailsFragment");
+        },
+                (property, position) -> {
+
+                propertyController.removeProperty(userId, property.getId());
+                Log.d("Property removed: ", property.getId());
         });
 
         rv.setAdapter(propertyAdapter);
 
         propertyController.getProperties(userId, new OnGetPropertiesListener() {
             @Override
-            public List<PropertyModel> onSuccess(List<PropertyModel> properties) {
+            public void onSuccess(List<PropertyModel> properties) {
                 if (properties != null) {
                     propertyAdapter.updateList(properties);
                 }
-                return properties;
             }
             @Override
             public void onFailure(Exception e) {

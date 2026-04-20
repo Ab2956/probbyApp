@@ -72,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/button_select"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintStart_toStartOf="@id/etPassword"
         app:layout_constraintEnd_toEndOf="@id/etPassword"

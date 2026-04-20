@@ -1,8 +1,10 @@
 package csrc.probbyapp.utils;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,16 +16,22 @@ import csrc.probbyapp.models.PropertyModel;
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
 
     private List<PropertyModel> properties;
+    private OnRemovePropertyListener removeListener;
 
-    public PropertyAdapter(List<PropertyModel> properties, OnPropertyClickListener listener) {
+    public interface OnRemovePropertyListener {
+        void onRemoveProperty(PropertyModel property, int position);
+    }
+
+    public PropertyAdapter(List<PropertyModel> properties, OnPropertyClickListener listener, OnRemovePropertyListener removeListener) {
         this.properties = properties;
         this.listener = listener;
+        this.removeListener = removeListener;
     }
 
     public void updateList(List<PropertyModel> properties) {
         this.properties = properties;
         notifyDataSetChanged();
-        System.out.println("Property list updated: " + properties.size() + " items");
+        Log.d("Property list updated: " , properties.size() + " items");
     }
 
     @NonNull
@@ -38,16 +46,25 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         PropertyModel property = properties.get(position);
         holder.tvType.setText(property.getPropertyType());
         holder.tvAddress.setText(property.getAddress());
-        String rent = "£" + property.getRent() + "Rent Amount";
+        String rent = "£" + property.getRent() + " Rent";
         holder.tvPrice.setText(rent);
+
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onPropertyClick(property);
             }
         });
+        if(holder.removeBtn != null) {
 
-        System.out.println("Property type: " + property.getPropertyType());
+            holder.removeBtn.setOnClickListener(v -> {
+                if (removeListener != null) {
+                    Log.d("Remove btn: ","Remove button clicked");
+                    removeListener.onRemoveProperty(property, position);
+                }
+            });
+        }
+        Log.d("Property type: " , property.getPropertyType());
     }
 
     @Override
@@ -57,9 +74,11 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvType, tvAddress, tvPrice;
+        Button removeBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            removeBtn = itemView.findViewById(R.id.remove_btn);
             tvType = itemView.findViewById(R.id.tvPropertyType);
             tvAddress = itemView.findViewById(R.id.tvPropertyAddress);
             tvPrice = itemView.findViewById(R.id.tvPropertyPrice);

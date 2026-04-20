@@ -1,10 +1,13 @@
 package csrc.probbyapp.database;
 
+import android.util.Log;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import java.util.ArrayList;
 import java.util.List;
 import csrc.probbyapp.models.PropertyModel;
+import csrc.probbyapp.utils.OnGetPropertiesListener;
 
 public class PropertyDataHandler{
 
@@ -19,10 +22,10 @@ public class PropertyDataHandler{
             .collection("properties")
             .add(property)
             .addOnSuccessListener(documentReference -> {
-              System.out.println("Property data added successfully");
+              Log.d("Property added: ", documentReference.getId());
             })
             .addOnFailureListener(e -> {
-              System.out.println("Error adding property data: " + e.getMessage());
+              Log.e("Error adding property data: " , e.getMessage());
             });
   }
 
@@ -36,102 +39,40 @@ public class PropertyDataHandler{
                     return;
                 }
                 if (value != null) {
-                    List<PropertyModel> properties = value.toObjects(PropertyModel.class);
+                    List<PropertyModel> properties = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : value) {
+                        PropertyModel property = doc.toObject(PropertyModel.class);
+                        property.setId(doc.getId());
+                        properties.add(property);
+                    }
                     listener.onSuccess(properties);
                 }
             } );
   }
 
-  public void getRent(){}
-  public void getRooms(){}
-  public void getMortgage(){}
-  public void getPropertyType(){}
-  public String getAddress(String userId, String propertyId){
-      getPropertiesRef(userId)
-              .document(propertyId)
-              .get()
-              .addOnSuccessListener(documentSnapshot -> {
-
-                  if (documentSnapshot.exists()) {
-                      DocumentSnapshot propertySnapshot = documentSnapshot;
-                      String address = propertySnapshot.getString("address");
-                      System.out.println("Address: " + address);
-                  } else {
-                      System.out.println("Document does not exist");
-                  }
-              })
-              .addOnFailureListener(e -> {
-                  System.out.println("Error getting address: " + e.getMessage());
-              });
-
-      return null;
-  }
-
-  public String getCity(String userId, String propertyId){
-      getPropertiesRef(userId)
-              .document(propertyId)
-              .get()
-              .addOnSuccessListener(documentSnapshot -> {
-
-                  if (documentSnapshot.exists()) {
-                      DocumentSnapshot propertySnapshot = documentSnapshot;
-                      String city = propertySnapshot.getString("city");
-                      System.out.println("City: " + city);
-                  } else {
-                      System.out.println("Document does not exist");
-                  }
-              })
-              .addOnFailureListener(e -> {
-                  System.out.println("Error getting city: " + e.getMessage());
-              });
-    return null;
-  }
-
-  public String getPostcode(String userId, String propertyId){
-      getPropertiesRef(userId)
-              .document(propertyId)
-              .get()
-              .addOnSuccessListener(documentSnapshot -> {
-
-                  if (documentSnapshot.exists()) {
-                      DocumentSnapshot propertySnapshot = documentSnapshot;
-                      String postcode = propertySnapshot.getString("postcode");
-                      System.out.println("Postcode: " + postcode);
-                      } else {
-                      System.out.println("Document does not exist");
-                  }
-              })
-              .addOnFailureListener(e -> {
-                  System.out.println("Error getting postcode: " + e.getMessage());
-              });
-    return null;
-  }
-
-  public void getStatus(String userId, String propertyId){
-      getPropertiesRef(userId)
-              .document(propertyId)
-              .get()
-              .addOnSuccessListener(documentSnapshot -> {
-          if (documentSnapshot.exists()) {
-              DocumentSnapshot propertySnapshot = documentSnapshot;
-              String status = propertySnapshot.getString("status");
-              System.out.println("Status: " + status);
-          } else {
-              System.out.println("Document does not exist");
-          }
-      }).addOnFailureListener(e -> {
-          System.out.println("Error getting status: " + e.getMessage());
-      });
-    }
-
     public CollectionReference getPropertiesRef(String userId){
-        db.collection("users")
+        return db.collection("users")
                 .document(userId)
                 .collection("properties");
-        return null;
     }
 
+    public void removeProperty(String userId, String propertyId) {
+        if (propertyId == null || propertyId.isEmpty()) {
+            Log.e("PropertyDataHandler", "Cannot delete property: propertyId is null");
+            return;
+        }
+        getPropertiesRef(userId)
+                .document(propertyId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Property removed: ", propertyId);
+                    })
+                .addOnFailureListener(e -> {
+                    Log.d("Error removing property: " , e.getMessage());
+                });
+    }
   public void getPropertyId(){}
+
 
 
 

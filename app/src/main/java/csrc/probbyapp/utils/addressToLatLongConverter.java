@@ -4,6 +4,8 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import csrc.probbyapp.database.PropertyDataHandler;
+import csrc.probbyapp.models.PropertyModel;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -16,22 +18,25 @@ public class addressToLatLongConverter {
         this.dataHandler = dataHandler;
     }
 
-    public LatLng convertAddressToLatLong(Context context,String userId, String propertyId) {
+    public LatLng convertAddressToLatLong(Context context, PropertyModel property) {
         Geocoder geocoder = new Geocoder(context);
         LatLng latLng = null;
 
+        String fullAddress = property.getAddress() + ", " +
+                property.getCity() + ", " +
+                property.getPostcode();
         try {
-            String fullAddress = dataHandler.getAddress(userId,propertyId) +
-                                 dataHandler.getCity(userId,propertyId) +
-                                 dataHandler.getPostcode(userId, propertyId);
-            List<Address> addressList = geocoder.getFromLocationName(fullAddress, 1);
-            Address location = addressList.get(0);
-            latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
+            List<Address> addressList = geocoder.getFromLocationName(fullAddress, 1);
+
+            if (addressList != null && !addressList.isEmpty()) {
+                Address location = addressList.get(0);
+                return new LatLng(location.getLatitude(), location.getLongitude());
+            }
         }catch (IOException e){
             e.printStackTrace();
         }
-        return latLng;
+        return null;
 
     }
 }

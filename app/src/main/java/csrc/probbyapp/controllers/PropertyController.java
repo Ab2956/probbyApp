@@ -1,6 +1,6 @@
 package csrc.probbyapp.controllers;
 
-import csrc.probbyapp.database.OnGetPropertiesListener;
+import csrc.probbyapp.utils.OnGetPropertiesListener;
 import csrc.probbyapp.database.PropertyDataHandler;
 import csrc.probbyapp.models.PropertyModel;
 
@@ -25,5 +25,11 @@ public class PropertyController {
             System.out.println("Error getting properties: " + e.getMessage());
         }
     }
-
+    public void removeProperty(String userId, String propertyId) {
+        try {
+            dataHandler.removeProperty(userId, propertyId);
+        } catch (Exception e){
+            System.out.println("Error removing property: " + e.getMessage());
+        }
+    }
 }

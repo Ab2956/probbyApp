@@ -9,7 +9,7 @@
     tools:context=".views.HomePageActivity">
 
     <!-- Fragment Container (Occupies the whole screen minus bottom nav) -->
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -26,6 +26,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_tool_bar" />
+        app:menu="@menu/menu_tool_bar"
+        android:background="?android:attr/windowBackground"
+        android:elevation="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
