@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import csrc.probbyapp.controllers.PropertyController;
+import csrc.probbyapp.database.PropertyDataHandler;
 import csrc.probbyapp.utils.OnGetPropertiesListener;
 import csrc.probbyapp.models.PropertyModel;
 
@@ -24,6 +25,7 @@ public class PropertyTests {
 
     @Mock
     private PropertyController propertyController;
+    private PropertyDataHandler propertyDataHandler;
 
     private String userId = "123";
 
@@ -70,6 +72,16 @@ public class PropertyTests {
         });
 
         verify(propertyController).getProperties(anyString(), any(OnGetPropertiesListener.class));
+    }
+
+    @Test
+    public void testTotalRent(){
+
+        propertyDataHandler = new PropertyDataHandler();
+
+        //double total = propertyDataHandler.getTotalRent("I29A30Ag3CT3NZ8WVocZBytiwLu1");
+
+        System.out.println();
     }
 }
 

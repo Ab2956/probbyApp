@@ -20,6 +20,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryVariant">#373738</item>
         <item name="rippleColor">@color/ripple_white</item>
+        <item name="android:windowSplashScreenBackground">@color/white</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#454242</item>

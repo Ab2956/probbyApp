@@ -2,6 +2,7 @@ package csrc.probbyapp.database;
 
 import android.util.Log;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
@@ -49,6 +50,22 @@ public class PropertyDataHandler{
                 }
             } );
   }
+    public void getTotalRent(String userId){
+      getPropertiesRef(userId)
+              .get()
+              .addOnSuccessListener(querySnapshot -> {
+                  double total = 0;
+
+                  for (DocumentSnapshot doc: querySnapshot ){
+                      double rent = doc.getDouble("rent");
+
+                      if (rent != 0) {
+                          total += rent;
+                      }
+                  }
+              });
+        ;
+    }
 
     public CollectionReference getPropertiesRef(String userId){
         return db.collection("users")
