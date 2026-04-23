@@ -20,7 +20,6 @@ public class addressToLatLongConverter {
 
     public LatLng convertAddressToLatLong(Context context, PropertyModel property) {
         Geocoder geocoder = new Geocoder(context);
-        LatLng latLng = null;
 
         String fullAddress = property.getAddress() + ", " +
                 property.getCity() + ", " +

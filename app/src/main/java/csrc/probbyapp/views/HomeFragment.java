@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import csrc.probbyapp.controllers.UserController;
 import csrc.probbyapp.R;
+import csrc.probbyapp.utils.UiHelper;
 
 public class HomeFragment extends Fragment {
 
     private UserController userController = new UserController();
+    UiHelper uiHelper = new UiHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,5 +37,7 @@ public class HomeFragment extends Fragment {
                 requireActivity().finish();
             });
         }
+        assert logoutBtn != null;
+        uiHelper.applyTouchEffect(logoutBtn);
     }
 }
