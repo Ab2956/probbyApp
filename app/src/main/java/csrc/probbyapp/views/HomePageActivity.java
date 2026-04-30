@@ -85,11 +85,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (homeF != null) transaction.hide(homeF);
-        if (mapF != null) transaction.hide(mapF);
-        if (propertiesF != null) transaction.hide(propertiesF);
-        if (settingsF != null) transaction.hide(settingsF);
-        if (profileF != null) transaction.hide(profileF);
+       transaction.hide(activeFragment);
 
         // Show only the selected one
         transaction.show(nextFragment).commit();

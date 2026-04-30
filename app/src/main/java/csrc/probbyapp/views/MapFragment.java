@@ -1,6 +1,7 @@
 package csrc.probbyapp.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.MapController;
 import csrc.probbyapp.models.MapPropertyModel;
+import csrc.probbyapp.utils.OnGetListener;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -42,18 +46,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         gMap = googleMap;
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        mapController.getAllPropertiesLatLong(getContext(), userId, mapProperties -> {
-            gMap.clear();
+        gMap.setOnMarkerClickListener(marker -> {
+            String propertyId = (String) marker.getTag();
 
-            for (MapPropertyModel property : mapProperties) {
-               MarkerOptions marker = new MarkerOptions()
-                       .position(property.getLatLng())
-                       .title(property.getAddress());
-               gMap.addMarker(marker);
+            if (propertyId != null) {
+                PropertyDetailsFragment detailsFragment = new PropertyDetailsFragment();
 
+                Bundle args = new Bundle();
+                args.putString("propertyId", propertyId);
+                detailsFragment.setArguments(args);
+
+                detailsFragment.show(getParentFragmentManager(), "PropertyDetails");
             }
-            if(!mapProperties.isEmpty()){
-                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapProperties.get(0).getLatLng(),12.0f));
+            return false;
+        });
+
+        mapController.getAllPropertiesLatLong(getContext(), userId, new OnGetListener<List<MapPropertyModel>>() {
+            @Override
+            public void onSuccess(List<MapPropertyModel> mapProperties) {
+                if (!isAdded() || gMap == null) return;
+
+                gMap.clear();
+
+                for (MapPropertyModel property : mapProperties) {
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(property.getLatLng())
+                            .title(property.getAddress());
+
+                    com.google.android.gms.maps.model.Marker marker = gMap.addMarker(markerOptions);
+                    if (marker != null) {
+                        marker.setTag(property.getPropertyId());
+                    }
+                }
+                if (!mapProperties.isEmpty()) {
+                    gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapProperties.get(0).getLatLng(), 12.0f));
+                }
+            }
+            @Override
+            public void onFailure(Exception e) {
+                Log.e("MapFragment", "Error getting properties: " + e.getMessage());
             }
         });
 

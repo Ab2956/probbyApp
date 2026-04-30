@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import csrc.probbyapp.database.PropertyDataHandler;
 import csrc.probbyapp.models.MapPropertyModel;
-import csrc.probbyapp.utils.OnMapReadyDataListener;
+import csrc.probbyapp.utils.OnGetListener;
 import csrc.probbyapp.utils.addressToLatLongConverter;
-import csrc.probbyapp.utils.OnGetPropertiesListener;
 import csrc.probbyapp.models.PropertyModel;
 
 public class MapController {
@@ -18,9 +17,9 @@ public class MapController {
     addressToLatLongConverter addressConverter = new addressToLatLongConverter(propertyDataHandler);
     MapPropertyModel mapProperty;
 
-    public void getAllPropertiesLatLong(Context context, String userId, OnMapReadyDataListener listener) {
+    public void getAllPropertiesLatLong(Context context, String userId, OnGetListener<List<MapPropertyModel>> listener) {
 
-        propertyController.getProperties(userId, new OnGetPropertiesListener() {
+        propertyController.getProperties(userId, new OnGetListener<List<PropertyModel>>() {
             @Override
             public void onSuccess(List<PropertyModel> properties) {
                 List<MapPropertyModel> mapProperties = new ArrayList<>();
@@ -34,7 +33,7 @@ public class MapController {
                         mapProperties.add(mapProperty = new MapPropertyModel(property.getId(), latLng, property.getAddress()));
                     }
                 }
-               listener.onDataReady(mapProperties);
+               listener.onSuccess(mapProperties);
             }
             @Override
             public void onFailure(Exception e) {

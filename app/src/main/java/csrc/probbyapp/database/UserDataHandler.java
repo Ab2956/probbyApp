@@ -1,8 +1,13 @@
 package csrc.probbyapp.database;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
+
+import csrc.probbyapp.models.UserModel;
+import csrc.probbyapp.utils.OnGetListener;
 
 public class UserDataHandler {
 
@@ -23,12 +28,21 @@ public class UserDataHandler {
         db.collection("users")
                 .document(uid)
                 .set(user);
-        System.out.println("User data added successfully");
+        Log.e("User data added successfully", "User data added successfully");
     }
-    public void getUser(String uid) {
+    public void getUser(String uid, OnGetListener<UserModel> listener) {
         db.collection("users")
                 .document(uid)
-                .get();
-        System.out.println("User data retrieved successfully");
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        UserModel user = documentSnapshot.toObject(UserModel.class);
+                        if (user != null) {
+                            user.setId(documentSnapshot.getId());
+                            listener.onSuccess(user);
+                        }
+                    }
+                    Log.e("User data retrieved successfully", "User data retrieved successfully");
+                });
     }
 }

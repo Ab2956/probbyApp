@@ -17,6 +17,7 @@
     <style name="Base.Theme.ProbbyApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary_color</item>
+        <item name="background">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryVariant">#373738</item>
         <item name="rippleColor">@color/ripple_white</item>

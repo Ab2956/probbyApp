@@ -17,7 +17,7 @@ import java.util.List;
 
 import csrc.probbyapp.controllers.PropertyController;
 import csrc.probbyapp.database.PropertyDataHandler;
-import csrc.probbyapp.utils.OnGetPropertiesListener;
+import csrc.probbyapp.utils.OnGetListener;
 import csrc.probbyapp.models.PropertyModel;
 
 public class PropertyTests {
@@ -52,12 +52,12 @@ public class PropertyTests {
         fakeList.add(new PropertyModel("123","House", "123 Main St","city","BN12 3ED","3",200.00, 1200.0,"Yes"));
 
         doAnswer(invocation -> {
-            OnGetPropertiesListener listener = invocation.getArgument(1);
+            OnGetListener<List<PropertyModel>> listener = invocation.getArgument(1);
             listener.onSuccess(fakeList);
             return null;
-        }).when(propertyController).getProperties(anyString(), any(OnGetPropertiesListener.class));
+        }).when(propertyController).getProperties(anyString(), any(OnGetListener.class));
 
-        propertyController.getProperties(userId, new OnGetPropertiesListener() {
+        propertyController.getProperties(userId, new OnGetListener<List<PropertyModel>>() {
             @Override
             public void onSuccess(List<PropertyModel> properties) {
 
@@ -71,7 +71,7 @@ public class PropertyTests {
             }
         });
 
-        verify(propertyController).getProperties(anyString(), any(OnGetPropertiesListener.class));
+        verify(propertyController).getProperties(anyString(), any(OnGetListener.class));
     }
 
     @Test

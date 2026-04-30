@@ -70,7 +70,7 @@ public class UserTests {
     public void testGetUser_CallsFirestore() {
         String uid = "test_uid";
 
-        userDataHandler.getUser(uid);
+        userDataHandler.getUser(uid, null);
 
         verify(mockDb).collection("users");
         verify(mockCollectionReference).document(uid);

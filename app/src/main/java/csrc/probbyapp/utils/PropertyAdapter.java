@@ -17,6 +17,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     private List<PropertyModel> properties;
     private OnRemovePropertyListener removeListener;
+    UIHelper uiHelper = new UIHelper();
 
     public interface OnRemovePropertyListener {
         void onRemoveProperty(PropertyModel property, int position);
@@ -65,6 +66,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             });
         }
         Log.d("Property type: " , property.getPropertyType());
+        uiHelper.applyTouchEffect(holder.removeBtn);
+        uiHelper.applyTouchEffect(holder.itemView);
     }
 
     @Override

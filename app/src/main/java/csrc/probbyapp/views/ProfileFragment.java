@@ -10,14 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.UserController;
+import csrc.probbyapp.models.UserModel;
+import csrc.probbyapp.utils.OnGetListener;
+import csrc.probbyapp.utils.UIHelper;
 
 public class ProfileFragment extends Fragment {
 
     UserController userController = new UserController() ;
+    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     Button logoutBtn;
+    UIHelper uiHelper = new UIHelper();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -41,6 +49,21 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView tvUserName = view.findViewById(R.id.username);
+        TextView tvEmail = view.findViewById(R.id.email);
+
+        userController.getUser(userId, new OnGetListener<UserModel>() {
+            @Override
+            public void onSuccess(UserModel data) {
+                tvEmail.setText(data.getEmail());
+                tvUserName.setText(data.getUserName());
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
 
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
         if (logoutBtn != null) {
@@ -51,5 +74,6 @@ public class ProfileFragment extends Fragment {
                 requireActivity().finish();
             });
         }
+       uiHelper.applyTouchEffect(logoutBtn);
     }
 }

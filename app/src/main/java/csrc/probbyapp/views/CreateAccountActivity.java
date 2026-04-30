@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.LoginController;
-import csrc.probbyapp.utils.UiHelper;
+import csrc.probbyapp.utils.UIHelper;
 
 public class CreateAccountActivity extends AppCompatActivity implements AuthView {
 
     private LoginController loginController;
-    UiHelper uiHelper = new UiHelper();
+    UIHelper uiHelper = new UIHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AuthView
         setContentView(R.layout.activity_create_account);
 
         Button createAccBtn = findViewById(R.id.btnCreateAcc);
+        EditText userNameInput = findViewById(R.id.etName);
         EditText emailInput = findViewById(R.id.etEmail);
         EditText passInput = findViewById(R.id.etPassword);
         EditText nameInput = findViewById(R.id.etName);
@@ -38,6 +39,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AuthView
         loginController = new LoginController((this));
 
         createAccBtn.setOnClickListener(v -> {
+            String username = userNameInput.getText().toString();
             String email = emailInput.getText().toString();
             String pass = passInput.getText().toString();
             String name = nameInput.getText().toString();

@@ -34,4 +34,14 @@
     <string name="city">City</string>
     <string name="remove">Remove</string>
     <string name="username">username</string>
+    <string name="close">Close</string>
+    <string name="overview">Overview</string>
+    <string name="user_name">User Name</string>
+    <string name="loading_name">Loading name...</string>
+    <string name="email_address">Email Address</string>
+    <string name="total_mortgate">Total Mortgate</string>
+    <string name="_0">£0</string>
+    <string name="total_unocuppied">Total Unocuppied</string>
+    <string name="total_available">Total Available</string>
+    <string name="total_mortgage">Total Mortgage</string>
 </resources>

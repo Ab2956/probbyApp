@@ -1,26 +1,28 @@
 package csrc.probbyapp.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 
 
 import csrc.probbyapp.controllers.LoginController;
 import csrc.probbyapp.R;
-import csrc.probbyapp.utils.UiHelper;
+import csrc.probbyapp.utils.UIHelper;
 
 public class LoginPageActivity extends AppCompatActivity implements AuthView {
     private boolean isLoggedIn = false;
     private final LoginController loginController = new LoginController(this);
-    UiHelper uiHelper = new UiHelper();
+    UIHelper uiHelper = new UIHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,9 @@ public class LoginPageActivity extends AppCompatActivity implements AuthView {
         FirebaseApp.initializeApp(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page);
+
+        SharedPreferences preferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE); int mode =
+                preferences.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
         Button loginBtn = findViewById(R.id.btnLogin);
         EditText emailInput = findViewById(R.id.etEmail);

@@ -17,8 +17,8 @@ public class PropertyModel {
 
     public  PropertyModel(){}
     public  PropertyModel(String id, String propertyType, String address, String city,
-                          String postcode, String rooms, double rent,
-                          double mortgage, String status){
+                          String postcode, String rooms, double mortgage,
+                           double rent, String status){
         this.id = id;
         this.address = address;
         this.city = city;

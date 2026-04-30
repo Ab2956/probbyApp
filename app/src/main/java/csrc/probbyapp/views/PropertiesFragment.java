@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.PropertyController;
-import csrc.probbyapp.utils.OnGetPropertiesListener;
+import csrc.probbyapp.utils.OnGetListener;
 import csrc.probbyapp.models.PropertyModel;
 import csrc.probbyapp.utils.PropertyAdapter;
-import csrc.probbyapp.utils.UiHelper;
+import csrc.probbyapp.utils.UIHelper;
 
 public class PropertiesFragment extends Fragment {
     List<PropertyModel> propertyList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class PropertiesFragment extends Fragment {
     FirebaseAuth fA = FirebaseAuth.getInstance();
     String userId = fA.getCurrentUser().getUid();
     PropertyAdapter propertyAdapter;
-    UiHelper uiHelper = new UiHelper();
+    UIHelper uiHelper = new UIHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class PropertiesFragment extends Fragment {
         uiHelper.applyTouchEffect(btnAddProperty);
 
         RecyclerView rv = view.findViewById(R.id.rvProperties);
-        rv.setLayoutManager(new LinearLayoutManager(getContext())); // Check if this exists!
+        rv.setLayoutManager(new LinearLayoutManager(getContext())); // Check if this exists
 
         propertyAdapter = new PropertyAdapter(propertyList, property -> {
             PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
@@ -58,9 +58,10 @@ public class PropertiesFragment extends Fragment {
                 Log.d("Property removed: ", property.getId());
         });
 
+
         rv.setAdapter(propertyAdapter);
 
-        propertyController.getProperties(userId, new OnGetPropertiesListener() {
+        propertyController.getProperties(userId, new OnGetListener<List<PropertyModel>>() {
             @Override
             public void onSuccess(List<PropertyModel> properties) {
                 if (properties != null) {

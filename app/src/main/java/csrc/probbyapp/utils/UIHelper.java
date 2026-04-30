@@ -3,7 +3,7 @@ package csrc.probbyapp.utils;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class UiHelper {
+public class UIHelper {
 
     public void applyTouchEffect(View view) {
         view.setOnTouchListener((v, event) -> {
