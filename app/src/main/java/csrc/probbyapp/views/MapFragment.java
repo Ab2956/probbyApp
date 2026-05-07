@@ -72,11 +72,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 if (!mapProperties.isEmpty()) {
                     gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapProperties.get(0).getLatLng(), 12.0f));
                 }
-                int bacthSize = 50;
+                int batchSize = 50;
 
-                for(int i = 0; i < mapProperties.size(); i += bacthSize){
-                    int start = 1;
-                    int end = Math.min(i + bacthSize, mapProperties.size());
+                for(int i = 0; i < mapProperties.size(); i += batchSize){
+                    int start = i;
+                    int end = Math.min(i + batchSize, mapProperties.size());
 
                     List<MapPropertyModel> batch = mapProperties.subList(start, end);
                     new android.os.Handler(android.os.Looper.getMainLooper())

@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Properties"
+                    android:text="@string/properties"
                     android:textAllCaps="true"
                     android:textColor="#757575"
                     android:textSize="12sp" />
@@ -108,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Rent"
+                    android:text="@string/total_rent"
                     android:textAllCaps="true"
                     android:textColor="#757575"
                     android:textSize="12sp" />
@@ -117,7 +117,7 @@
                     android:id="@+id/totalRent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="£0"
+                    android:text="@string/_0"
                     android:textColor="#2E7D32"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -198,7 +198,7 @@
                         android:id="@+id/totalMortgage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="£0"
+                        android:text="@string/_0"
                         android:textColor="#FF0000"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -209,7 +209,7 @@
     </LinearLayout>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
             app:cardCornerRadius="16dp"
@@ -226,7 +226,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Income"
+                    android:text="@string/income"
                     android:textAllCaps="true"
                     android:textColor="#757575"
                     android:textSize="12sp" />
@@ -235,7 +235,7 @@
                     android:id="@+id/income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="£0"
+                    android:text="@string/_0"
                     android:textColor="@color/primary_color"
                     android:textSize="24sp"
                     android:textStyle="bold" />

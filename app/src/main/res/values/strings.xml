@@ -44,4 +44,8 @@
     <string name="total_unocuppied">Total Unocuppied</string>
     <string name="total_available">Total Available</string>
     <string name="total_mortgage">Total Mortgage</string>
+    <string name="income">Income</string>
+    <string name="total_rent">Total Rent</string>
+    <string name="filter">Filter</string>
+    <string name="order_by">Order By</string>
 </resources>

@@ -9,15 +9,32 @@ public class PropertyStats {
     public double totalMortgage;
     public double income;
     public int available;
-    public List<PropertyModel> properties;
+
+
 
     public PropertyStats(int totalProperties, double totalRent, double totalMortgage,
-                         double income, int available, List<PropertyModel> properties) {
+                         double income, int available){
         this.totalProperties = totalProperties;
         this.totalRent = totalRent;
         this.totalMortgage = totalMortgage;
         this.income = income;
         this.available = available;
-        this.properties = properties;
+
     }
+    public double getNetIncome(){
+        return income;
+    }
+    public double getTotalRent() {
+        return totalRent;
+    }
+    public double getTotalMortgage() {
+        return totalMortgage;
+    }
+    public int getAvailableCount() {
+        return available;
+    }
+    public int getTotalCount() {
+        return totalProperties;
+    }
+
 }

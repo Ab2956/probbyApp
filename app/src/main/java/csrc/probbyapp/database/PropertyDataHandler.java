@@ -9,6 +9,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import csrc.probbyapp.models.PropertyModel;
+import csrc.probbyapp.models.PropertyStats;
 import csrc.probbyapp.utils.OnGetListener;
 
 public class PropertyDataHandler{
@@ -32,30 +33,48 @@ public class PropertyDataHandler{
             });
   }
 
-  public void getProperties(String userId, OnGetListener<List<PropertyModel>> listenerCallback) {
+  public void getProperties(String userId, OnGetListener<List<PropertyModel>> propertyListener, OnGetListener<PropertyStats> statsListener) {
       if (listener != null) {
           listener.remove();
       }
 
-      listener = db.collection("users")
-              .document(userId)
-              .collection("properties")
+      listener = getPropertiesRef(userId)
               .addSnapshotListener((value, error) -> {
                   if (error != null) {
-                      listenerCallback.onFailure(error);
+                      propertyListener.onFailure(error);
                       return;
                   }
 
                   if (value != null) {
                       List<PropertyModel> properties = new ArrayList<>();
+                      
+                      double totalRent = 0;
+                      double totalMortgage = 0;
+                      int availableCount = 0;
+                      int totalProperties = value.size();
 
                       for (QueryDocumentSnapshot doc : value) {
                           PropertyModel property = doc.toObject(PropertyModel.class);
                           property.setId(doc.getId());
                           properties.add(property);
+
+                          totalRent += property.getRent();
+                          totalMortgage += property.getMortgage();
+                          if (property.isAvailable()) {
+                              availableCount++;
+                          }
                       }
 
-                      listenerCallback.onSuccess(properties);
+                      propertyListener.onSuccess(properties);
+
+                      PropertyStats stats = new PropertyStats(
+                              totalProperties,
+                              totalRent,
+                              totalMortgage,
+                              (totalRent - totalMortgage),
+                              availableCount
+                      );
+                      statsListener.onSuccess(stats);
                   }
               });
   }
@@ -112,80 +131,6 @@ public class PropertyDataHandler{
                     Log.d("Error removing property: " , e.getMessage());
                 });
     }
-    public void getTotalPropertyCount(String userId, OnGetListener<Integer> listener){
-        getPropertiesRef(userId)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        listener.onFailure(error);
-                        return;
-                    }
-                    if (value != null) {
-                        listener.onSuccess(value.size());
-                    }
-                });
-    }
-    public void getTotalAvailable(String userId, OnGetListener<Integer> listener){
-        getPropertiesRef(userId)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        listener.onFailure(error);
-                        return;
-                    }
-                    if (value != null) {
-                        int total = 0;
-                        for (DocumentSnapshot doc : value) {
-                            String status = doc.getString("status");
-                            if (status != null && status.equals("Available")) {
-                                total++;
-                            }
-                        }
-                        listener.onSuccess(total);
-
-                    }
-                });
-    }
-    public void getTotalMortgage(String userId, OnGetListener<Double> listener){
-        getPropertiesRef(userId)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        listener.onFailure(error);
-                        return;
-                    }
-                    if (value != null) {
-                        double total = 0;
-                        for (DocumentSnapshot doc : value) {
-                            double mortgage = doc.getDouble("mortgage");
-                            if (mortgage != 0) {
-                                total += mortgage;
-                            }
-                        }
-                        listener.onSuccess(total);
-                    }
-                });
-    }
-    public void getIncome(String userId, OnGetListener<Double> listener){
-       getPropertiesRef(userId)
-               .addSnapshotListener((value, error) -> {
-                   if (error != null) {
-                       listener.onFailure(error);
-                       return;
-                   }
-                   if (value != null) {
-                       double total = 0;
-                       for (DocumentSnapshot doc : value) {
-                           double rent = doc.getDouble("rent");
-                           double mortgage = doc.getDouble("mortgage");
-                           if (rent != 0 || mortgage != 0) {
-                               total += rent - mortgage;
-                           }
-                       }
-                       listener.onSuccess(total);
-                   }
-               });
-    }
-  public void getPropertyId(){}
-
-
 
 
 }

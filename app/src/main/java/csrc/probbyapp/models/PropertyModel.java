@@ -86,5 +86,13 @@ public class PropertyModel {
     }
 
 
+    public boolean isAvailable() {
+        if (status.equals("Available")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
