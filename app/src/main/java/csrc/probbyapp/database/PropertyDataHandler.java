@@ -4,6 +4,7 @@ import android.util.Log;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import csrc.probbyapp.utils.OnGetListener;
 public class PropertyDataHandler{
 
   FirebaseFirestore db ;
+  private ListenerRegistration listener;
 
   public PropertyDataHandler() {this.db = FirebaseFirestore.getInstance();}
   public PropertyDataHandler(FirebaseFirestore db) {this.db = db;}
@@ -30,25 +32,32 @@ public class PropertyDataHandler{
             });
   }
 
-  public void getProperties(String userId, OnGetListener<List<PropertyModel>> listener) {
-    db.collection("users")
-            .document(userId)
-            .collection("properties")
-            .addSnapshotListener( (value, error) ->{
-                if (error != null) {
-                    listener.onFailure(error);
-                    return;
-                }
-                if (value != null) {
-                    List<PropertyModel> properties = new ArrayList<>();
-                    for (QueryDocumentSnapshot doc : value) {
-                        PropertyModel property = doc.toObject(PropertyModel.class);
-                        property.setId(doc.getId());
-                        properties.add(property);
-                    }
-                    listener.onSuccess(properties);
-                }
-            } );
+  public void getProperties(String userId, OnGetListener<List<PropertyModel>> listenerCallback) {
+      if (listener != null) {
+          listener.remove();
+      }
+
+      listener = db.collection("users")
+              .document(userId)
+              .collection("properties")
+              .addSnapshotListener((value, error) -> {
+                  if (error != null) {
+                      listenerCallback.onFailure(error);
+                      return;
+                  }
+
+                  if (value != null) {
+                      List<PropertyModel> properties = new ArrayList<>();
+
+                      for (QueryDocumentSnapshot doc : value) {
+                          PropertyModel property = doc.toObject(PropertyModel.class);
+                          property.setId(doc.getId());
+                          properties.add(property);
+                      }
+
+                      listenerCallback.onSuccess(properties);
+                  }
+              });
   }
     public void getTotalRent(String userId, OnGetListener<Double> listener){
       getPropertiesRef(userId)

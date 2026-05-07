@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -68,18 +69,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                 gMap.clear();
 
-                for (MapPropertyModel property : mapProperties) {
-                    MarkerOptions markerOptions = new MarkerOptions()
-                            .position(property.getLatLng())
-                            .title(property.getAddress());
-
-                    com.google.android.gms.maps.model.Marker marker = gMap.addMarker(markerOptions);
-                    if (marker != null) {
-                        marker.setTag(property.getPropertyId());
-                    }
-                }
                 if (!mapProperties.isEmpty()) {
                     gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapProperties.get(0).getLatLng(), 12.0f));
+                }
+                int bacthSize = 50;
+
+                for(int i = 0; i < mapProperties.size(); i += bacthSize){
+                    int start = 1;
+                    int end = Math.min(i + bacthSize, mapProperties.size());
+
+                    List<MapPropertyModel> batch = mapProperties.subList(start, end);
+                    new android.os.Handler(android.os.Looper.getMainLooper())
+                            .postDelayed(() -> {
+
+                                if (!isAdded() || gMap == null) return;
+
+                                for (MapPropertyModel property : batch) {
+                                    Marker marker = gMap.addMarker(
+                                            new MarkerOptions()
+                                                    .position(property.getLatLng())
+                                                    .title(property.getAddress())
+                                    );
+
+                                    if (marker != null) {
+                                        marker.setTag(property.getPropertyId());
+                                    }
+                                }
+
+                            }, start * 10);
                 }
             }
             @Override

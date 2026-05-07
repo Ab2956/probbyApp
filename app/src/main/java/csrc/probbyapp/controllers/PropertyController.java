@@ -23,6 +23,7 @@ public class PropertyController {
     public void getProperties(String userId, OnGetListener<List<PropertyModel>> listener){
         try {
             dataHandler.getProperties(userId, listener);
+
         } catch (Exception e){
             System.out.println("Error getting properties: " + e.getMessage());
         }
