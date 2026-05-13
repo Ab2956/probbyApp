@@ -48,4 +48,8 @@
     <string name="total_rent">Total Rent</string>
     <string name="filter">Filter</string>
     <string name="order_by">Order By</string>
+    <string name="my_properties">My Properties</string>
+    <string name="_1_200_month">£1,200 / month</string>
+    <string name="address_line">Address line...</string>
+    <string name="house_type">House Type</string>
 </resources>

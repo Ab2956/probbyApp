@@ -53,7 +53,7 @@ public class PropertiesFragment extends Fragment {
             popupMenu.getMenu().add("All");
             popupMenu.getMenu().add("House");
             popupMenu.getMenu().add("Flat");
-            popupMenu.getMenu().add("Condo");
+            popupMenu.getMenu().add("Bungalow");
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 String type = item.getTitle().toString();
@@ -142,6 +142,7 @@ public class PropertiesFragment extends Fragment {
         if (propertyAdapter != null) {
             propertyAdapter.updateList(filteredProperties);
         }
+
     }
 
     private void applyOrder(String type){

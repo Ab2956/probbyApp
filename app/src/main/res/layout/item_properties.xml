@@ -7,7 +7,7 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
-    android:background="@color/white"
+    android:background="?attr/colorOnBackground"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/white"
+        android:background="?attr/android:colorBackground"
         >
     <LinearLayout
         android:layout_width="0dp"
@@ -29,7 +29,7 @@
             android:id="@+id/tvPropertyType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="House Type"
+            android:text="@string/house_type"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/tvPropertyAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address line..."
+            android:text="@string/address_line"
             android:textColor="#666666" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="£1,200 / month"
+            android:text="@string/_1_200_month"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
 

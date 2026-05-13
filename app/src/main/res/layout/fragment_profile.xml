@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="?attr/android:windowBackground"
     tools:context=".views.ProfileFragment">
 
     <!-- 1. Blue Header Background -->
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/profile"
-        android:textColor="@color/white"
+        android:textColor="?attr/android:textColor"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
             android:padding="20dp"
             android:src="@drawable/ic_profile"
             app:tint="?attr/colorPrimary"
-            android:background="@color/cardview_light_background"/>
+            android:background="?attr/android:colorBackground"/>
     </com.google.android.material.card.MaterialCardView>
 
     <!-- 4. Info Card -->
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp"
-            android:background="@color/cardview_light_background">
+            android:background="?attr/android:colorBackground">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/loading_name"
-                android:textColor="#212121"
+                android:textColor="?attr/android:textColor"
                 android:textSize="16sp"
               />
 
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Loading email..."
-                android:textColor="#212121"
+                android:textColor="?attr/android:textColor"
                 android:textSize="16sp" />
 
         </LinearLayout>

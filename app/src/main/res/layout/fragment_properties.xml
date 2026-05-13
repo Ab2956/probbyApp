@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.PropertiesFragment"
-    android:background="@color/cardview_light_background">
+    android:background="?attr/android:windowBackground">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="My Properties"
+        android:text="@string/my_properties"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,26 +42,34 @@
 
     <Button
         android:id="@+id/filterBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/filter"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon">
+
+        android:textColor="?attr/colorPrimary"
+        app:icon="@drawable/ic_filter"
+        app:iconPadding="8dp"
+        app:iconTint="?attr/android:textColor"
+        android:layout_marginLeft="10dp">
 
     </Button>
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <Button
         android:id="@+id/orderByBtn"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:text="@string/order_by"
+        android:layout_marginStart="10dp"
+        app:icon="@drawable/ic_sort"
+        app:iconTint="?attr/android:textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         app:layout_constraintTop_toBottomOf="@id/btnAddProperty">
 
     </Button>
@@ -69,9 +77,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rvProperties"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="70dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

@@ -27,10 +27,10 @@ public class FilterController {
         List<PropertyModel> sortedProperties = new ArrayList<>(properties);
 
         if (type.equalsIgnoreCase("Rent")) {
-            sortedProperties.sort((p1, p2) -> Integer.compare(p1.getRent(), p2.getRent()));
+            sortedProperties.sort((p1, p2) -> Integer.compare(p2.getRent(), p1.getRent()));
         }
         else if (type.equalsIgnoreCase("Mortgage")) {
-            sortedProperties.sort((p1, p2) -> Integer.compare(p1.getMortgage(), p2.getMortgage()));
+            sortedProperties.sort((p1, p2) -> Integer.compare(p2.getMortgage(), p1.getMortgage()));
         }
 
         return sortedProperties;
