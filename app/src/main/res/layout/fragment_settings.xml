@@ -11,10 +11,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Appearance"
+        android:text="@string/settings"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appearance"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp">
+
+        </TextView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -34,20 +48,118 @@
                 android:id="@+id/rbLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Light Mode" />
+                android:text="@string/light_mode" />
 
             <RadioButton
                 android:id="@+id/rbDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode" />
+                android:text="@string/dark_mode" />
 
-            <RadioButton
-                android:id="@+id/rbSystem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="System Default" />
         </RadioGroup>
     </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_marginTop="15dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="?attr/android:colorBackground">
+
+        <EditText
+            android:id="@+id/CurrentPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/current_password"
+            android:padding="12dp"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_transparent"
+            android:layout_margin="12dp"/>
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_transparent"
+            android:padding="12dp"
+            android:layout_margin="12dp"/>
+
+            <Button
+                android:id="@+id/btnSubNewPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/submit"
+                android:backgroundTint="@color/button_select"
+                android:layout_marginBottom="5dp">
+
+            </Button>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_user_name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp">
+
+        </TextView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="15dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="?attr/android:colorBackground">
+
+                <EditText
+                    android:id="@+id/NewUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="New User Name"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:background="@drawable/rounded_transparent"
+                    android:layout_margin="12dp"/>
+
+                <Button
+                    android:id="@+id/btnSubNewName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/submit"
+                    android:backgroundTint="@color/button_select"
+                    android:layout_marginBottom="5dp">
+
+                </Button>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </LinearLayout>

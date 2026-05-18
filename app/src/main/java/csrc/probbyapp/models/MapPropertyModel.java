@@ -4,6 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MapPropertyModel {
 
+    // Map model for the properties to be displayed on the map
     private String propertyId;
     private LatLng latLng;
     private String address;

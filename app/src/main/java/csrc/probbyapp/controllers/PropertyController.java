@@ -9,6 +9,8 @@ import csrc.probbyapp.models.PropertyModel;
 
 public class PropertyController {
 
+    // Property functionality - using the PropertyDataHandler to get, add properties and remove
+    // uses the OnGetListener to return the data to the view
     PropertyDataHandler dataHandler = new PropertyDataHandler();
 
     public PropertyController() {}

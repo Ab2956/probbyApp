@@ -17,6 +17,9 @@ import csrc.probbyapp.models.PropertyModel;
 
 public class MapController {
 
+    // Map functionality to get the properties lat and long via the address
+    // Executor is used to run the conversion in a separate thread to avoid blocking the UI thread
+
     PropertyController propertyController = new PropertyController();
     PropertyDataHandler propertyDataHandler = new PropertyDataHandler();
     addressToLatLongConverter addressConverter = new addressToLatLongConverter(propertyDataHandler);

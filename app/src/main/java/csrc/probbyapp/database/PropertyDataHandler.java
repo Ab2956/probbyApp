@@ -14,6 +14,8 @@ import csrc.probbyapp.utils.OnGetListener;
 
 public class PropertyDataHandler{
 
+    // Data handler for the properties from the database and a part of the data layer
+
   FirebaseFirestore db ;
   private ListenerRegistration listener;
 
@@ -33,6 +35,8 @@ public class PropertyDataHandler{
             });
   }
 
+  // gets the properties from the database and returns them to the controller
+    // add the properties stats to the model
   public void getProperties(String userId, OnGetListener<List<PropertyModel>> propertyListener, OnGetListener<PropertyStats> statsListener) {
       if (listener != null) {
           listener.remove();
@@ -78,25 +82,7 @@ public class PropertyDataHandler{
                   }
               });
   }
-    public void getTotalRent(String userId, OnGetListener<Double> listener){
-      getPropertiesRef(userId)
-              .addSnapshotListener((value, error) -> {
-                  if (error != null) {
-                      listener.onFailure(error);
-                      return;
-                  }
-                  if (value != null) {
-                      double total = 0;
-                      for (DocumentSnapshot doc: value ){
-                          double rent = doc.getDouble("rent");
-                          if (rent != 0) {
-                              total += rent;
-                          }
-                      }
-                      listener.onSuccess(total);
-                  }
-              });
-    }
+
     public void getPropertyById(String userId,String propertyId, OnGetListener<PropertyModel> listener){
       getPropertiesRef(userId).document(propertyId).get()
               .addOnSuccessListener(documentSnapshot -> {
@@ -110,6 +96,8 @@ public class PropertyDataHandler{
               })
               .addOnFailureListener(listener::onFailure);
     }
+
+    // helper for collections - reduce code size
     public CollectionReference getPropertiesRef(String userId){
         return db.collection("users")
                 .document(userId)

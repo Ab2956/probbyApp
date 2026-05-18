@@ -15,6 +15,8 @@ import csrc.probbyapp.models.PropertyModel;
 
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
 
+    // Adapter for the properties to be displayed on the recycler view
+
     private List<PropertyModel> properties;
     private OnRemovePropertyListener removeListener;
     UIHelper uiHelper = new UIHelper();

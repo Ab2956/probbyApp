@@ -35,7 +35,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+        }
+    }
 }
+
 
 dependencies {
 
@@ -52,7 +59,9 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.google.firebase.firestore)
     implementation(libs.compiler)
+    implementation(libs.engage.core)
     testImplementation(libs.junit)
+    testImplementation("org.mockito:mockito-inline:5.2.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:34.12.0"))

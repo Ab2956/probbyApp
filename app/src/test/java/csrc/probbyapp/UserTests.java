@@ -33,17 +33,25 @@ public class UserTests {
     private UserDataHandler userDataHandler;
     private AutoCloseable closeable;
 
+    @Mock
+    private Task<com.google.firebase.firestore.DocumentSnapshot> mockSnapshotTask;
+
     @Before
     public void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
         userDataHandler = new UserDataHandler(mockDb);
-        
-        // Inject the mock DB
         userDataHandler.db = mockDb;
 
         when(mockDb.collection(anyString())).thenReturn(mockCollectionReference);
         when(mockCollectionReference.document(anyString())).thenReturn(mockDocumentReference);
+
         when(mockDocumentReference.set(any())).thenReturn(mockVoidTask);
+        when(mockVoidTask.addOnSuccessListener(any())).thenReturn(mockVoidTask);
+        when(mockVoidTask.addOnFailureListener(any())).thenReturn(mockVoidTask);
+
+        when(mockDocumentReference.get()).thenReturn(mockSnapshotTask);
+        when(mockSnapshotTask.addOnSuccessListener(any())).thenReturn(mockSnapshotTask);
+        when(mockSnapshotTask.addOnFailureListener(any())).thenReturn(mockSnapshotTask);
     }
 
     @After
@@ -54,12 +62,12 @@ public class UserTests {
     }
 
     @Test
-    public void testAddUser_CallsFirestore() {
+    public void testAddUser() {
         String uid = "test_uid";
-        String name = "Test User";
+        String userName = "Test User";
         String email = "test@example.com";
 
-        userDataHandler.addUser(uid, name, email);
+        userDataHandler.addUser(uid, userName, email);
 
         verify(mockDb).collection("users");
         verify(mockCollectionReference).document(uid);
@@ -67,7 +75,7 @@ public class UserTests {
     }
 
     @Test
-    public void testGetUser_CallsFirestore() {
+    public void testGetUser() {
         String uid = "test_uid";
 
         userDataHandler.getUser(uid, null);

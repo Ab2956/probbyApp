@@ -15,8 +15,9 @@
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="245dp"
-        android:layout_height="167dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_height="140dp"
+        android:src="@mipmap/ic_logo_background"
+        android:background="?android:windowBackground"
         app:layout_constraintBottom_toTopOf="@+id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -12,12 +12,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class addressToLatLongConverter {
+
+    // Service to convert address to lat long for the map SDK
+
     private final PropertyDataHandler dataHandler;
 
     public addressToLatLongConverter(PropertyDataHandler dataHandler) {
         this.dataHandler = dataHandler;
     }
 
+    // conversion method
     public LatLng convertAddressToLatLong(Context context, PropertyModel property) {
         Geocoder geocoder = new Geocoder(context);
 

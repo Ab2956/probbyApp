@@ -19,6 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="?attr/android:windowBackground"/>
 
+    <View
+        android:id="@+id/bottomNavDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorOutlineVariant"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"

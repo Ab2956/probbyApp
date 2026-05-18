@@ -52,4 +52,14 @@
     <string name="_1_200_month">£1,200 / month</string>
     <string name="address_line">Address line...</string>
     <string name="house_type">House Type</string>
+    <string name="new_password">New Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="system_default">System Default</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="appearance">Appearance</string>
+    <string name="change_user_name">Change User Name</string>
+    <string name="submit">Submit</string>
+    <string name="welcome">Welcome!</string>
 </resources>

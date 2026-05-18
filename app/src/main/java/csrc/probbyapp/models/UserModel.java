@@ -2,6 +2,9 @@ package csrc.probbyapp.models;
 import com.google.gson.annotations.SerializedName;
 
 public class UserModel {
+
+    // UserModel class to format user for database
+
     @SerializedName("_id")
     private String id;
 

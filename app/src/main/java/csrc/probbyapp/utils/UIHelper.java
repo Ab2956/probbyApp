@@ -5,6 +5,8 @@ import android.view.View;
 
 public class UIHelper {
 
+    // UI helper to add touch effect to buttons
+
     public void applyTouchEffect(View view) {
         view.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {            case MotionEvent.ACTION_DOWN:

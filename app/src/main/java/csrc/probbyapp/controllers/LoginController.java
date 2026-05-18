@@ -8,22 +8,26 @@ import csrc.probbyapp.database.UserDataHandler;
 
 public class LoginController {
 
+    // Login functionality - using Firebase Auth
+
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private final AuthView view;
     private final UserDataHandler userDataHandler = new UserDataHandler();
 
+    // Constructor for LoginController
     public LoginController(AuthView view){
         this.view = view;
     }
 
-    public void createAccount(String name, String email,String pass, View v){
+    // create account method - using Firebase Auth to create and get the current user
+    public void createAccount(String userName, String email,String pass, View v){
         firebaseAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(task ->{
                     if (task.isSuccessful()) {
                         assert firebaseAuth.getCurrentUser() != null;
                         String uid = firebaseAuth.getCurrentUser().getUid();
 
-                        userDataHandler.addUser(uid, name, email);
+                        userDataHandler.addUser(uid, userName, email);
                         view.showMessage("Successfully created account", v);
                         view.navigateTo();
                     }else {
@@ -32,6 +36,7 @@ public class LoginController {
                 });
     }
 
+    // sign in method - using Firebase Auth to sign in the user
     public void signInUser(String email, String pass, View v){
         if(email.isEmpty() || pass.isEmpty()){
             view.showMessage("Please enter both email and password", v);

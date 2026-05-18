@@ -17,6 +17,7 @@ firebaseFirestore = "26.1.1"
 firebaseFirestoreVersion = "26.1.2"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 compiler = "3.2.0-alpha11"
+engageCore = "1.5.12"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +37,7 @@ firebase-common = { group = "com.google.firebase", name = "firebase-common", ver
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestoreVersion" }
 compiler = { group = "androidx.databinding", name = "compiler", version.ref = "compiler" }
+engage-core = { group = "com.google.android.engage", name = "engage-core", version.ref = "engageCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

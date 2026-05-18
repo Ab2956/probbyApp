@@ -11,6 +11,8 @@ import csrc.probbyapp.utils.OnGetListener;
 
 public class UserDataHandler {
 
+    // Data handler for the users from the database and a part of the data layer
+
     public FirebaseFirestore db;
 
     public UserDataHandler(){
@@ -20,9 +22,10 @@ public class UserDataHandler {
         this.db = db;
     }
 
-    public void addUser(String uid, String name, String email){
+    // add user to the database
+    public void addUser(String uid, String userName, String email){
         Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
+        user.put("userName", userName);
         user.put("email", email);
 
         db.collection("users")
@@ -30,6 +33,8 @@ public class UserDataHandler {
                 .set(user);
         Log.e("User data added successfully", "User data added successfully");
     }
+
+    // gets user from the database
     public void getUser(String uid, OnGetListener<UserModel> listener) {
         db.collection("users")
                 .document(uid)
@@ -44,5 +49,13 @@ public class UserDataHandler {
                     }
                     Log.e("User data retrieved successfully", "User data retrieved successfully");
                 });
+    }
+    public void updateUserName(String uid, String userName){
+        Map<String, Object> user = new HashMap<>();
+        user.put("userName", userName);
+        db.collection("users")
+                .document(uid)
+                .update(user);
+        Log.e("User name updated successfully", "User name updated successfully");
     }
 }

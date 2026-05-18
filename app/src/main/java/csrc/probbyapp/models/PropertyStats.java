@@ -4,6 +4,8 @@ import java.util.List;
 
 public class PropertyStats {
 
+    // PropertyStats model
+
     public int totalProperties;
     public double totalRent;
     public double totalMortgage;

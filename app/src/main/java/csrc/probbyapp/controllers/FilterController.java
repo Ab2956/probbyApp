@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import csrc.probbyapp.models.PropertyModel;
 
 public class FilterController {
+    // Filter and order by functionality
 
+    // Filter properties by type - using stream method
     public List<PropertyModel> filterProperties(List<PropertyModel> properties, String type) {
 
         if (type == null || type.isEmpty() || type.equalsIgnoreCase("All")) {
@@ -20,6 +22,7 @@ public class FilterController {
 
     }
 
+    // Sort properties by rent or mortgage - using sort method from Collections class
     public List<PropertyModel> sortProperties(List<PropertyModel> properties, String type) {
         if (type == null || type.isEmpty() || type.equalsIgnoreCase("All")) {
             return properties;

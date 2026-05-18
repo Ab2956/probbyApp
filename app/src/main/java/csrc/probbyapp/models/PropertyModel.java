@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class PropertyModel {
 
+    // Property model
+
     @SerializedName("_id")
     private String id;
     private String address;
