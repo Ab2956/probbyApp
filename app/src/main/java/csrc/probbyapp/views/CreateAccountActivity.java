@@ -35,6 +35,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AuthView
             startActivity(new Intent(this, LoginPageActivity.class));
             finish();
         });
+        uiHelper.applyTouchEffect(backBtn);
 
         loginController = new LoginController((this));
 

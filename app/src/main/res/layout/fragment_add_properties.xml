@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -157,3 +163,4 @@
     </LinearLayout>
     </ScrollView>
 </com.google.android.material.card.MaterialCardView>
+</androidx.core.widget.NestedScrollView>
