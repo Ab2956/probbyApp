@@ -15,6 +15,10 @@
 ### Map
 - **In Map fragment tab:** properties will show on map with marker
 - **In Map fragment** click on property to view details
+### Filter
+- **In Properties fragment:** click filter button
+- **Filter** property type
+- **Order** property by rent, mortgage, or standard
 
 
 # AI Usage Documentation - Uni Project
