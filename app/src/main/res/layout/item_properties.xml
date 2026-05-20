@@ -48,6 +48,16 @@
             android:text="@string/_1_200_month"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvPropertyMortgage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/_1_200_month"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold">
+
+        </TextView>
 
     </LinearLayout>
     <Button

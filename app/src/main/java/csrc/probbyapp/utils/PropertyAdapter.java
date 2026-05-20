@@ -51,8 +51,10 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         PropertyModel property = properties.get(position);
         holder.tvType.setText(property.getPropertyType());
         holder.tvAddress.setText(property.getAddress());
+        String mortgage = "£" + property.getMortgage() + " Mortgage";
         String rent = "£" + property.getRent() + " Rent";
         holder.tvPrice.setText(rent);
+        holder.tvMortgage.setText(mortgage);
 
 
         holder.itemView.setOnClickListener(v -> {
@@ -81,7 +83,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvType, tvAddress, tvPrice;
+        TextView tvType, tvAddress, tvPrice, tvMortgage;
         Button removeBtn;
 
         public ViewHolder(View itemView) {
@@ -90,6 +92,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             tvType = itemView.findViewById(R.id.tvPropertyType);
             tvAddress = itemView.findViewById(R.id.tvPropertyAddress);
             tvPrice = itemView.findViewById(R.id.tvPropertyPrice);
+            tvMortgage = itemView.findViewById(R.id.tvPropertyMortgage);
         }
     }
 
