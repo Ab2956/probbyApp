@@ -51,8 +51,12 @@ public class UserController {
     }
 
     public void changeUserName(String newUserName, OnGetListener<String> listener){
-        assert firebaseAuth.getCurrentUser() != null;
-        String uid = firebaseAuth.getCurrentUser().getUid();
-        userDataHandler.updateUserName(uid, newUserName);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            userDataHandler.updateUserName(uid, newUserName, listener);
+        } else if (listener != null) {
+            listener.onFailure(new Exception("User not logged in"));
+        }
     }
 }

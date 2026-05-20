@@ -1,35 +1,28 @@
 package csrc.probbyapp.views;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.List;
-
 import csrc.probbyapp.controllers.PropertyController;
-import csrc.probbyapp.controllers.UserController;
 import csrc.probbyapp.R;
 import csrc.probbyapp.models.PropertyModel;
 import csrc.probbyapp.models.PropertyStats;
 import csrc.probbyapp.utils.OnGetListener;
-import csrc.probbyapp.utils.UIHelper;
 
 public class HomeFragment extends Fragment {
 
-    private UserController userController = new UserController();
+    // Fragment for the home page
+
     private PropertyController propertyController = new PropertyController();
-    UIHelper uiHelper = new UIHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

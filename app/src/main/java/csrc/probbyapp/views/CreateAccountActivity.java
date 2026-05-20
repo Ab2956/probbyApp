@@ -14,6 +14,8 @@ import csrc.probbyapp.utils.UIHelper;
 
 public class CreateAccountActivity extends AppCompatActivity implements AuthView {
 
+    // Activity for creating an account
+
     private LoginController loginController;
     UIHelper uiHelper = new UIHelper();
 

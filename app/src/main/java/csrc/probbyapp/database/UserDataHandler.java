@@ -50,12 +50,20 @@ public class UserDataHandler {
                     Log.e("User data retrieved successfully", "User data retrieved successfully");
                 });
     }
-    public void updateUserName(String uid, String userName){
+
+    public void updateUserName(String uid, String userName, OnGetListener<String> listener){
         Map<String, Object> user = new HashMap<>();
         user.put("userName", userName);
         db.collection("users")
                 .document(uid)
-                .update(user);
-        Log.e("User name updated successfully", "User name updated successfully");
+                .update(user)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("UserDataHandler", "User name updated successfully");
+                    if (listener != null) listener.onSuccess("User name updated successfully");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("UserDataHandler", "Error updating user name", e);
+                    if (listener != null) listener.onFailure(e);
+                });
     }
 }

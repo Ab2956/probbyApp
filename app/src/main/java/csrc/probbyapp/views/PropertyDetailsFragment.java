@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.Objects;
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.PropertyController;
@@ -19,9 +17,11 @@ import csrc.probbyapp.utils.UIHelper;
 
 public class PropertyDetailsFragment extends DialogFragment {
 
+    // Fragment for the property details page
+
     private String propertyId;
     private PropertyController propertyController;
-    UIHelper uiHelper = new UIHelper();
+    private UIHelper uiHelper = new UIHelper();
 
 
     @Override

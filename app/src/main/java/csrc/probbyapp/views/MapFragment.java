@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -14,15 +13,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.List;
-
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.MapController;
 import csrc.probbyapp.models.MapPropertyModel;
 import csrc.probbyapp.utils.OnGetListener;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+
+    // Fragment for the map view uses Google Maps API and map controller to add markers to the map
 
     private GoogleMap gMap;
     MapController mapController = new MapController();

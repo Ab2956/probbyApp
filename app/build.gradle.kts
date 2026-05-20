@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-
     id("com.google.gms.google-services")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
@@ -11,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "csrc.probbyapp"
-        minSdk = 33
+        minSdk = 29
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -43,9 +42,7 @@ android {
     }
 }
 
-
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -69,5 +66,4 @@ dependencies {
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.11.0")
-
 }

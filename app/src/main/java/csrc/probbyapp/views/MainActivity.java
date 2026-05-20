@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         new Handler().postDelayed(new Runnable() {
-            @Override                                                                                               // Splash activity for the welcome page when loading into app
+            @Override                        // Splash activity for the welcome page when loading into app
             public void run() {
                 Intent intentSplash = new Intent(MainActivity.this, LoginPageActivity.class);
                 startActivity(intentSplash);
                 finish();
             }
-        },1000);                                                                                          // 2000 millisecond delay for the welcome page
+        },1000);                    // 2000 millisecond delay for the welcome page
 
         Log.d(TAG, "onCreate: ");
     }

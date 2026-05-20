@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,6 +66,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                 if (removeListener != null) {
                     Log.d("Remove btn: ","Remove button clicked");
                     removeListener.onRemoveProperty(property, position);
+                    Toast.makeText(holder.itemView.getContext(), "Property removed", Toast.LENGTH_SHORT).show();
                 }
             });
         }

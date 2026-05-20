@@ -1,7 +1,6 @@
 package csrc.probbyapp.views;
 
 import static android.content.Context.MODE_PRIVATE;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,26 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.databinding.tool.Context;
 import androidx.fragment.app.Fragment;
-
 import csrc.probbyapp.R;
 import csrc.probbyapp.controllers.UserController;
-import csrc.probbyapp.database.UserDataHandler;
 import csrc.probbyapp.utils.OnGetListener;
 import csrc.probbyapp.utils.UIHelper;
 
 public class SettingsFragment extends Fragment {
 
+    // Fragment for the settings page
+
     private SharedPreferences sharedPreferences;
     private UserController userController = new UserController();
-    UIHelper uiHelper = new UIHelper();
+    private UIHelper uiHelper = new UIHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,48 +58,60 @@ public class SettingsFragment extends Fragment {
             // Apply the theme immediately
             AppCompatDelegate.setDefaultNightMode(mode);
         });
+
         EditText CurrentPass = view.findViewById(R.id.CurrentPass);
         EditText etPassword = view.findViewById(R.id.etPassword);
         Button btnSubNewPass = view.findViewById(R.id.btnSubNewPass);
+        
         btnSubNewPass.setOnClickListener(v -> {
-            if (CurrentPass.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
+            String current = CurrentPass.getText().toString();
+            String news = etPassword.getText().toString();
+            
+            if (current.isEmpty() || news.isEmpty()) {
+                Toast.makeText(getContext(), "Please fill in all password fields", Toast.LENGTH_SHORT).show();
                 return;
             }
-            else{
-                userController.changePassword(etPassword.getText().toString(), CurrentPass.getText().toString(), new OnGetListener<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        CurrentPass.setText("");
-                        etPassword.setText("");
-                    }
+            
+            userController.changePassword(news, current, new OnGetListener<String>() {
+                @Override
+                public void onSuccess(String data) {
+                    Toast.makeText(getContext(), "Password updated successfully", Toast.LENGTH_SHORT).show();
+                    CurrentPass.setText("");
+                    etPassword.setText("");
+                }
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        CurrentPass.setError("Check current password");
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Exception e) {
+                    CurrentPass.setError("Check current password");
+                    Toast.makeText(getContext(), "Failed to update password", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         EditText NewUserName = view.findViewById(R.id.NewUserName);
         Button btnSubNewName = view.findViewById(R.id.btnSubNewName);
+        
         btnSubNewName.setOnClickListener(v -> {
-            if (NewUserName.getText().toString().isEmpty()) {
+            String newName = NewUserName.getText().toString();
+            if (newName.isEmpty()) {
+                Toast.makeText(getContext(), "Please enter a new username", Toast.LENGTH_SHORT).show();
                 return;
             }
-            else{
-                userController.changeUserName(NewUserName.getText().toString(), new OnGetListener<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        NewUserName.setText("");
-                    }
-                    @Override
-                    public void onFailure(Exception e) {
-                        NewUserName.setError("Error change user name");
-                    }
-                });
-            }
+            
+            userController.changeUserName(newName, new OnGetListener<String>() {
+                @Override
+                public void onSuccess(String data) {
+                    Toast.makeText(getContext(), "Username updated successfully", Toast.LENGTH_SHORT).show();
+                    NewUserName.setText("");
+                }
+                @Override
+                public void onFailure(Exception e) {
+                    NewUserName.setError("Error changing username");
+                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
+
         uiHelper.applyTouchEffect(btnSubNewName);
         uiHelper.applyTouchEffect(btnSubNewPass);
 

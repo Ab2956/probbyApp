@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 import java.util.UUID;
@@ -18,6 +19,8 @@ import csrc.probbyapp.models.PropertyModel;
 import csrc.probbyapp.utils.UIHelper;
 
 public class AddPropertiesFragment extends DialogFragment {
+
+    // Fragment for adding properties to the database
 
     PropertyModel property;
     FirebaseAuth fA = FirebaseAuth.getInstance();
@@ -118,7 +121,15 @@ public class AddPropertiesFragment extends DialogFragment {
             assert fA.getCurrentUser() != null;
             String userId = fA.getCurrentUser().getUid();
 
+            // check if fields are empty
+            if (property.getPropertyType().isEmpty() || property.getAddress().isEmpty() || property.getCity().isEmpty()
+                    || property.getPostcode().isEmpty() || property.getRooms().isEmpty()) {
+                Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             propertyController.addProperty(property, userId);
+            Toast.makeText(getContext(), "Property added successfully", Toast.LENGTH_SHORT).show();
 
             dismiss();
         });

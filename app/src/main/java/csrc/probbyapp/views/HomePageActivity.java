@@ -10,6 +10,8 @@ import csrc.probbyapp.R;
 
 public class HomePageActivity extends AppCompatActivity {
 
+    // Activity for the home page with manual management of fragments
+
     private Fragment homeF, mapF, propertiesF, settingsF, profileF;
     private Fragment activeFragment;
 
@@ -39,7 +41,7 @@ public class HomePageActivity extends AppCompatActivity {
                     .add(R.id.fragmentContainer, homeF, "home")
                     .commit();
         } else {
-            // RESTORE fragments from FragmentManager to prevent "Ghosts"
+            // fragments from FragmentManager to prevent Ghosts
             homeF = fm.findFragmentByTag("home");
             mapF = fm.findFragmentByTag("map");
             propertiesF = fm.findFragmentByTag("properties");

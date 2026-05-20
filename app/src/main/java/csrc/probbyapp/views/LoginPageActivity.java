@@ -10,17 +10,16 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
-
-
 import csrc.probbyapp.controllers.LoginController;
 import csrc.probbyapp.R;
 import csrc.probbyapp.utils.UIHelper;
 
 public class LoginPageActivity extends AppCompatActivity implements AuthView {
-    private boolean isLoggedIn = false;
+
+    // Activity for the login page uses firebase auth
+
     private final LoginController loginController = new LoginController(this);
     UIHelper uiHelper = new UIHelper();
 
